@@ -3,12 +3,10 @@ source 'https://rubygems.org'
 # Specify your gem's dependencies in rack-cookie_auth.gemspec
 gemspec
 
-gem 'rake'
-
 # The development group will no be
 # installed on Travis CI.
 #
-group :development do
+group :guard do
   require 'rbconfig'
 
   if RbConfig::CONFIG['target_os'] =~ /darwin/i
@@ -29,12 +27,14 @@ group :development do
     gem 'rb-notifu', '>= 0.0.4', :require => false
     gem 'wdm', :require => false
   end
+
+  gem 'guard-test'
 end
 
 # The development group will no be
 # installed on Travis CI.
 #
 group :test do
-  gem 'guard-test'
+  gem 'rake'
 end
 

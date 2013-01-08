@@ -31,7 +31,7 @@ If you don't use Bundler, be sure to require Rack::CookieAuth manually before ac
 To use Rack::CookieAuth in your Rails application, add the following line to your application config file (`config/application.rb` or `config/environments/production.rb`) for Rails 3, `config/environment.rb` for Rails 2):
 
 ```ruby
-use Rack::CookieAuth, cookie_secret: 'YOUR_SESSION_SECRET'
+config.use Rack::CookieAuth, cookie_secret: 'YOUR_SESSION_SECRET'
 
 # or if you're using Rack::Cache, be sure to insert Rack::CookieAuth before
 config.middleware.insert_before Rack::Cache, Rack::CookieAuth, cookie_secret: 'YOUR_SESSION_SECRET'

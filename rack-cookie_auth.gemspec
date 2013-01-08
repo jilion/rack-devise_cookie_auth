@@ -18,8 +18,8 @@ Gem::Specification.new do |gem|
   gem.add_dependency 'rack',          '>= 1.0'
   gem.add_dependency 'activesupport', '>= 2.3.2'
 
-  gem.add_development_dependency 'bundler',    '~> 1.0'
-  gem.add_development_dependency 'test-unit',  '~> 2.5'
-  gem.add_development_dependency 'shoulda',    '~> 3.3'
-  gem.add_development_dependency 'rack-test',  '~> 0.6'
+  gem.add_development_dependency 'bundler',   '~> 1.0'
+  gem.add_development_dependency 'test-unit', '~> 2.5'
+  gem.add_development_dependency 'shoulda',   '~> 3.3'
+  gem.add_development_dependency 'rack-test', '~> 0.6'
 end

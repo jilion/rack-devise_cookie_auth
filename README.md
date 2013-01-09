@@ -61,6 +61,17 @@ config.middleware.use Rack::CookieAuth, cookie_secret: 'YOUR_SESSION_SECRET', re
 config.middleware.use Rack::CookieAuth, cookie_secret: 'YOUR_SESSION_SECRET', redirect_to: 'https://yourdomain.com/login'
 ```
 
+### Return to param key
+
+By default, the middleware will redirect with a `?user_return_to` param key with the requested url as value but you can customize the param key with the `:return_to_param_key` option:
+
+```ruby
+config.middleware.use Rack::CookieAuth, cookie_secret: 'YOUR_SESSION_SECRET', return_to_param_key: 'admin_return_to'
+
+# ... or avoid this param with nil
+config.middleware.use Rack::CookieAuth, cookie_secret: 'YOUR_SESSION_SECRET', return_to_param_key: nil
+```
+
 ### Key in the Rack env for the current logged-in user ID
 
 By default, the middleware will store the ID of the user retrieved from the cookie in `env['user_id_key']` but if you want to use another key, for instance "admin_id_key", you can set it with the `:user_id_key` option:

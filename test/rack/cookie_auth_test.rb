@@ -19,7 +19,7 @@ class TestRackCookieAuth < Test::Unit::TestCase
     should 'redirect to root' do
       get 'https://www.example.org/admin'
       assert_equal 302, last_response.status
-      assert_equal 'https://www.example.org', last_response.location
+      assert_equal 'https://www.example.org?user_return_to=https://www.example.org/admin', last_response.location
     end
   end
 
@@ -62,7 +62,7 @@ class TestRackCookieAuth < Test::Unit::TestCase
         should 'redirect to root' do
           get 'https://www.example.org/admin'
           assert_equal 302, last_response.status
-          assert_equal 'https://www.example.org', last_response.location
+          assert_equal 'https://www.example.org?user_return_to=https://www.example.org/admin', last_response.location
         end
       end
 
@@ -75,7 +75,7 @@ class TestRackCookieAuth < Test::Unit::TestCase
         should 'redirect to given :redirect_to' do
           get 'https://www.example.org/admin'
           assert_equal 302, last_response.status
-          assert_equal 'https://www.example.org', last_response.location
+          assert_equal 'https://www.example.org?user_return_to=https://www.example.org/admin', last_response.location
         end
       end
 
@@ -89,7 +89,7 @@ class TestRackCookieAuth < Test::Unit::TestCase
           should 'redirect to given :redirect_to' do
             get 'https://www.example.org/admin'
             assert_equal 302, last_response.status
-            assert_equal 'https://www.example.org/login', last_response.location
+            assert_equal 'https://www.example.org/login?user_return_to=https://www.example.org/admin', last_response.location
           end
         end
 
@@ -102,7 +102,7 @@ class TestRackCookieAuth < Test::Unit::TestCase
           should 'redirect to given :redirect_to' do
             get 'https://www.example.org/admin'
             assert_equal 302, last_response.status
-            assert_equal 'https://www.example.org/login', last_response.location
+            assert_equal 'https://www.example.org/login?user_return_to=https://www.example.org/admin', last_response.location
           end
         end
 
@@ -113,6 +113,34 @@ class TestRackCookieAuth < Test::Unit::TestCase
           }
 
           should 'redirect to given :redirect_to' do
+            get 'https://www.example.org/admin'
+            assert_equal 302, last_response.status
+            assert_equal 'https://www.example.org/login?user_return_to=https://www.example.org/admin', last_response.location
+          end
+        end
+      end
+
+      context ':return_to_param_name option' do
+        context 'is custom' do
+          setup {
+            mock_app cookie_secret: 'abcd1234', redirect_to: 'https://www.example.org/login', return_to_param_key: 'admin_return_to'
+            set_cookie!('admin_remember_token', verifier('1234abcd').generate([1, @expires_at]), @expires_at)
+          }
+
+          should 'not add return_to params' do
+            get 'https://www.example.org/admin'
+            assert_equal 302, last_response.status
+            assert_equal 'https://www.example.org/login?admin_return_to=https://www.example.org/admin', last_response.location
+          end
+        end
+
+        context 'is nil' do
+          setup {
+            mock_app cookie_secret: 'abcd1234', redirect_to: 'https://www.example.org/login', return_to_param_key: nil
+            set_cookie!('admin_remember_token', verifier('1234abcd').generate([1, @expires_at]), @expires_at)
+          }
+
+          should 'not add return_to params' do
             get 'https://www.example.org/admin'
             assert_equal 302, last_response.status
             assert_equal 'https://www.example.org/login', last_response.location
@@ -135,7 +163,7 @@ class TestRackCookieAuth < Test::Unit::TestCase
         should 'redirect to root' do
           get 'https://www.example.org/admin'
           assert_equal 302, last_response.status
-          assert_equal 'https://www.example.org', last_response.location
+          assert_equal 'https://www.example.org?user_return_to=https://www.example.org/admin', last_response.location
         end
       end
 
@@ -148,7 +176,7 @@ class TestRackCookieAuth < Test::Unit::TestCase
         should 'redirect to given :redirect_to' do
           get 'https://www.example.org/admin'
           assert_equal 302, last_response.status
-          assert_equal 'https://www.example.org', last_response.location
+          assert_equal 'https://www.example.org?user_return_to=https://www.example.org/admin', last_response.location
         end
       end
 
@@ -161,7 +189,7 @@ class TestRackCookieAuth < Test::Unit::TestCase
         should 'redirect to given :redirect_to' do
           get 'https://www.example.org/admin'
           assert_equal 302, last_response.status
-          assert_equal 'https://www.example.org/login', last_response.location
+          assert_equal 'https://www.example.org/login?user_return_to=https://www.example.org/admin', last_response.location
         end
       end
     end

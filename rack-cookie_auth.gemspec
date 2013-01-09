@@ -1,14 +1,14 @@
 # -*- encoding: utf-8 -*-
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'rack/cookie_auth/version'
+require 'rack/devise_cookie_auth/version'
 
 Gem::Specification.new do |gem|
-  gem.name          = 'rack-cookie_auth'
-  gem.version       = Rack::CookieAuth::VERSION
+  gem.name          = 'rack-devise_cookie_auth'
+  gem.version       = Rack::DeviseCookieAuth::VERSION
   gem.authors       = ['Rémy Coutable']
   gem.email         = ['remy@jilion.com']
-  gem.homepage      = 'https://github.com/jilion/rack-cookie_auth'
+  gem.homepage      = 'https://github.com/jilion/rack-devise_cookie_auth'
   gem.description   = %q{Rack middleware to log in from a "remember me" cookie.}
   gem.summary       = %q{Rack middleware to log admin in from a "remember me" cookie.}
 

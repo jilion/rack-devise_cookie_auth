@@ -5,7 +5,7 @@ require 'rack/test'
 
 $LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
 $LOAD_PATH.unshift(File.dirname(__FILE__))
-require 'rack/cookie_auth'
+require 'rack/devise_cookie_auth'
 
 class Test::Unit::TestCase
   include Rack::Test::Methods
@@ -27,7 +27,7 @@ class Test::Unit::TestCase
 
   def app_builder
     builder = Rack::Builder.new
-    builder.use Rack::CookieAuth, @options
+    builder.use Rack::DeviseCookieAuth, @options
     builder.run(main_app)
     builder.to_app
   end

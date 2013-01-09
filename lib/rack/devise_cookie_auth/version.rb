@@ -1,5 +1,5 @@
 module Rack
-  class CookieAuth
+  class DeviseCookieAuth
     VERSION = '0.0.1'
   end
 end

@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-# Specify your gem's dependencies in rack-cookie_auth.gemspec
+# Specify your gem's dependencies in rack-devise_cookie_auth.gemspec
 gemspec
 
 # The development group will no be

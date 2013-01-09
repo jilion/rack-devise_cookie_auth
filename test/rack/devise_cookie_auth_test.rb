@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class TestRackCookieAuth < Test::Unit::TestCase
+class TestRackDeviseCookieAuth < Test::Unit::TestCase
 
   context 'no cookie secret passed' do
     should 'raise an argument error' do

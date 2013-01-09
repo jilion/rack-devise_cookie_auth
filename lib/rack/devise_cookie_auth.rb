@@ -1,8 +1,8 @@
-require 'rack/cookie_auth/version'
+require 'rack/devise_cookie_auth/version'
 require 'active_support/message_verifier'
 
 module Rack
-  class CookieAuth
+  class DeviseCookieAuth
     DEFAULT_OPTIONS = {
       cookie_name: 'remember_user_token',
       user_id_key: 'current_user_id',

@@ -1,13 +1,13 @@
 Rack::DeviseCookieAuth [![Build Status](https://secure.travis-ci.org/jilion/rack-devise_cookie_auth.png?branch=master)](http://travis-ci.org/jilion/rack-devise_cookie_auth) [![Dependency Status](https://gemnasium.com/jilion/rack-devise_cookie_auth.png)](https://gemnasium.com/jilion/rack-devise_cookie_auth) [![Code Climate](https://codeclimate.com/badge.png)](https://codeclimate.com/github/jilion/rack-devise_cookie_auth)
 =====
 
-Rack::DeviseCookieAuth allows to log-in from a remember-me [Devise](https://github.com/plataformatec/devise) token stored in a cookie.
+Rack::DeviseCookieAuth allows to log-in from a [Devise](https://github.com/plataformatec/devise) remember-me token stored in a cookie.
 
 It depends on Active::Support >= 2.3.2 and is tested against Ruby 1.9.2, 1.9.3, ruby-head and the latest versions of Rubinius & JRuby.
 
 ## Installation
 
-Add this line to your application's Gemfile:
+Add this line to your application's Gemfile (probably in the `:production` group only):
 
 ```ruby
 gem 'rack-devise_cookie_auth'

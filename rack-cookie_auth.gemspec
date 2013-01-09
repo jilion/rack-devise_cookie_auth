@@ -6,11 +6,11 @@ require 'rack/devise_cookie_auth/version'
 Gem::Specification.new do |gem|
   gem.name          = 'rack-devise_cookie_auth'
   gem.version       = Rack::DeviseCookieAuth::VERSION
-  gem.authors       = ['Rémy Coutable']
-  gem.email         = ['remy@jilion.com']
+  gem.authors       = ['Rémy Coutable', 'Thibaud Guillaume-Gentil']
+  gem.email         = ['remy@jilion.com', 'thibaud@jilion.com']
   gem.homepage      = 'https://github.com/jilion/rack-devise_cookie_auth'
-  gem.description   = %q{Rack middleware to log in from a "remember me" cookie.}
-  gem.summary       = %q{Rack middleware to log admin in from a "remember me" cookie.}
+  gem.description   = %q{Rack middleware to log in from a "remember me" Devise cookie.}
+  gem.summary       = %q{Rack middleware to log admin in from a "remember me" Devise cookie.}
 
   gem.files        = Dir.glob("{lib}/**/*") + %w[CHANGELOG.md LICENSE.md README.md]
   gem.require_path = 'lib'

@@ -1,7 +1,7 @@
 Rack::DeviseCookieAuth [![Build Status](https://secure.travis-ci.org/jilion/rack-devise_cookie_auth.png?branch=master)](http://travis-ci.org/jilion/rack-devise_cookie_auth) [![Dependency Status](https://gemnasium.com/jilion/rack-devise_cookie_auth.png)](https://gemnasium.com/jilion/rack-devise_cookie_auth) [![Code Climate](https://codeclimate.com/badge.png)](https://codeclimate.com/github/jilion/rack-devise_cookie_auth)
 =====
 
-Rack::DeviseCookieAuth allows to log-in from a remember-me token stored in a cookie.
+Rack::DeviseCookieAuth allows to log-in from a remember-me [Devise](https://github.com/plataformatec/devise) token stored in a cookie.
 
 It depends on Active::Support >= 2.3.2 and is tested against Ruby 1.9.2, 1.9.3, ruby-head and the latest versions of Rubinius & JRuby.
 
@@ -25,28 +25,28 @@ If you don't use Bundler, be sure to require Rack::DeviseCookieAuth manually bef
 
 ```ruby
  require 'rack/devise_cookie_auth'
- use Rack::DeviseCookieAuth, cookie_secret: 'YOUR_SESSION_SECRET'
+ use Rack::DeviseCookieAuth, secret: 'YOUR_SESSION_SECRET'
 ```
 
 To use Rack::DeviseCookieAuth in your Rails application, add the following line to your application config file (`config/application.rb` or `config/environments/production.rb`) for Rails 3, `config/environment.rb` for Rails 2):
 
 ```ruby
-config.use Rack::DeviseCookieAuth, cookie_secret: 'YOUR_SESSION_SECRET'
+config.use Rack::DeviseCookieAuth, secret: 'YOUR_SESSION_SECRET'
 
 # or if you're using Rack::Cache, be sure to insert Rack::DeviseCookieAuth before
-config.middleware.insert_before Rack::Cache, Rack::DeviseCookieAuth, cookie_secret: 'YOUR_SESSION_SECRET'
+config.middleware.insert_before Rack::Cache, Rack::DeviseCookieAuth, secret: 'YOUR_SESSION_SECRET'
 ```
 
-Please note that the `:cookie_secret` option is mandatory!
+Please note that the `:secret` option is mandatory and can normally be found in the 'config/initializers/secret_token.rb' file of your Rails app.
 
 ## Options
 
-### Cookie name
+### Resource name
 
-By default, the middleware will look for a cookie named "remember_user_token" but if your cookie is named otherwise, for instance "remember_admin_token", you can set it with the `:cookie_name` option:
+By default, the middleware will look for the user resource cookie named "remember_user_token" but if want to use authenticate againts another resource name you can set it with the `:resource` option:
 
 ```ruby
-config.middleware.use Rack::DeviseCookieAuth, cookie_secret: 'YOUR_SESSION_SECRET', cookie_name: 'remember_admin_token'
+config.middleware.use Rack::DeviseCookieAuth, secret: 'YOUR_SESSION_SECRET', resource: 'admin'
 ```
 
 ### Redirection URL
@@ -55,29 +55,10 @@ By default, the middleware will redirect to the root path of the current domain 
 
 ```ruby
 # It can be a path...
-config.middleware.use Rack::DeviseCookieAuth, cookie_secret: 'YOUR_SESSION_SECRET', redirect_to: '/login'
+config.middleware.use Rack::DeviseCookieAuth, secret: 'YOUR_SESSION_SECRET', redirect_to: '/login'
 
 # ... or a full URL
-config.middleware.use Rack::DeviseCookieAuth, cookie_secret: 'YOUR_SESSION_SECRET', redirect_to: 'https://yourdomain.com/login'
-```
-
-### Return to param key
-
-By default, the middleware will redirect with a `?user_return_to` param key with the requested url as value but you can customize the param key with the `:return_to_param_key` option:
-
-```ruby
-config.middleware.use Rack::DeviseCookieAuth, cookie_secret: 'YOUR_SESSION_SECRET', return_to_param_key: 'admin_return_to'
-
-# ... or avoid this param with nil
-config.middleware.use Rack::DeviseCookieAuth, cookie_secret: 'YOUR_SESSION_SECRET', return_to_param_key: nil
-```
-
-### Key in the Rack env for the current logged-in user ID
-
-By default, the middleware will store the ID of the user retrieved from the cookie in `env['user_id_key']` but if you want to use another key, for instance "admin_id_key", you can set it with the `:user_id_key` option:
-
-```ruby
-config.middleware.use Rack::DeviseCookieAuth, cookie_secret: 'YOUR_SESSION_SECRET', user_id_key: 'admin_id_key'
+config.middleware.use Rack::DeviseCookieAuth, secret: 'YOUR_SESSION_SECRET', redirect_to: 'https://yourdomain.com/login'
 ```
 
 Development
@@ -94,9 +75,10 @@ Pull requests are very welcome! Please try to follow these simple rules if appli
 * Update the [CHANGELOG](https://github.com/jilion/rack-devise_cookie_auth/blob/master/CHANGELOG.md) for noteworthy changes.
 * Please **do not change** the version number.
 
-### Author
+### Authors
 
-[Rémy Coutable](https://github.com/rymai) ([@rymai](http://twitter.com/rymai), [rymai.me](http://rymai.me))
+* [Rémy Coutable](https://github.com/rymai) ([@rymai](http://twitter.com/rymai), [rymai.me](http://rymai.me))
+* [Thibaud Guillaume-Gentil](https://github.com/thibaudgg) ([@thibaudgg](http://twitter.com/thibaudgg), [thibaud.me](http://thibaud.me))
 
 ### Contributors
 

@@ -31,7 +31,7 @@ If you don't use Bundler, be sure to require Rack::DeviseCookieAuth manually bef
 To use Rack::DeviseCookieAuth in your Rails application, add the following line to your application config file (`config/application.rb` or `config/environments/production.rb`) for Rails 3, `config/environment.rb` for Rails 2):
 
 ```ruby
-config.use Rack::DeviseCookieAuth, secret: 'YOUR_SESSION_SECRET'
+config.middleware.use Rack::DeviseCookieAuth, secret: 'YOUR_SESSION_SECRET'
 
 # or if you're using Rack::Cache, be sure to insert Rack::DeviseCookieAuth before
 config.middleware.insert_before Rack::Cache, Rack::DeviseCookieAuth, secret: 'YOUR_SESSION_SECRET'

@@ -1,4 +1,4 @@
-Copyright (c) 2013 Rémy Coutable
+Copyright (c) 2013 Jilion SA
 
 MIT License
 

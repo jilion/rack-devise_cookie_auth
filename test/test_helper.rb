@@ -19,8 +19,8 @@ class Test::Unit::TestCase
     @app     = app_builder
   end
 
-  def verifier(cookie_secret = nil)
-    @verifier ||= ActiveSupport::MessageVerifier.new(cookie_secret || @options[:cookie_secret])
+  def verifier(secret = nil)
+    @verifier ||= ActiveSupport::MessageVerifier.new(secret || @options[:secret])
   end
 
   private
@@ -39,8 +39,8 @@ class Test::Unit::TestCase
     }
   end
 
-  def set_cookie!(name, value, expires_at)
-    set_cookie("#{name}=#{value}; expires=#{expires_at}; secure; HttpOnly", URI.parse("https://www.example.org"))
+  def set_cookie!(name, value)
+    set_cookie("#{name}=#{value}; expires=#{Time.now + 3600}; secure; HttpOnly", URI.parse("https://www.example.org"))
   end
 
 end

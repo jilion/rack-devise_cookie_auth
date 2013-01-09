@@ -4,13 +4,11 @@ require 'active_support/message_verifier'
 module Rack
   class DeviseCookieAuth
     DEFAULT_OPTIONS = {
-      cookie_name: 'remember_user_token',
-      user_id_key: 'current_user_id',
-      redirect_to: nil,
-      return_to_param_key: 'user_return_to'
+      resource: 'user',
+      redirect_to: nil
     }
     def initialize(app, options = {})
-      raise ArgumentError, 'Cookie secret must be set!' if options[:cookie_secret].nil?
+      raise ArgumentError, 'Cookie secret must be set!' if options[:secret].nil?
 
       @app, @options = app, DEFAULT_OPTIONS.merge(options)
     end
@@ -18,14 +16,11 @@ module Rack
     def call(env)
       @request = Rack::Request.new(env)
 
-      verifier = ActiveSupport::MessageVerifier.new(@options[:cookie_secret])
-      env[@options[:user_id_key]], expires_at = verifier.verify(@request.cookies[@options[:cookie_name]])
+      verifier = ActiveSupport::MessageVerifier.new(@options[:secret])
+      resource_ids, remember_key = verifier.verify(@request.cookies[cookie_name])
+      env["current_#{resource}_id"] = resource_ids.first
 
-      if expires_at > Time.now
-        @app.call(env)
-      else
-        redirect!
-      end
+      @app.call(env)
     rescue ActiveSupport::MessageVerifier::InvalidSignature
       redirect!
     end
@@ -34,6 +29,14 @@ module Rack
 
     def redirect!
       [302, { 'Content-Type' => 'text/html', 'Location' => redirect_url }, ["Redirected to #{redirect_url}!"]]
+    end
+
+    def resource
+      @options[:resource].to_s
+    end
+
+    def cookie_name
+      "remember_#{resource}_token"
     end
 
     def redirect_url
@@ -49,9 +52,7 @@ module Rack
     end
 
     def return_to
-      if @options[:return_to_param_key]
-        "#{@options[:return_to_param_key]}=#{@request.url}"
-      end
+      "#{resource}_return_to=#{@request.url}"
     end
 
   end

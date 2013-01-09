@@ -1,4 +1,4 @@
-## 0.0.1 - January 8, 2013
+## 0.1.0 - January 9, 2013
 
 ### Initial release by [@rymai][]
 

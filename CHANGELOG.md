@@ -1,3 +1,7 @@
+## 1.0.0 - August 29, 2013
+
+- Support Rails 4 (only)
+
 ## 0.1.0 - January 9, 2013
 
 ### Initial release

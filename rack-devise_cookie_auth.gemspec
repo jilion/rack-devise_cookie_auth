@@ -11,7 +11,7 @@ Gem::Specification.new do |gem|
   gem.homepage      = 'https://github.com/jilion/rack-devise_cookie_auth'
   gem.description   = %q{Rack middleware to log in from a "remember me" Devise cookie.}
   gem.summary       = %q{Rack middleware to log admin in from a "remember me" Devise cookie.}
-  gem.license       = ['MIT']
+  gem.licenses      = ['MIT']
 
   gem.files        = Dir.glob("{lib}/**/*") + %w[CHANGELOG.md LICENSE.md README.md]
   gem.require_path = 'lib'

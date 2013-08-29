@@ -1,4 +1,5 @@
 require 'rack/devise_cookie_auth/version'
+require 'active_support/key_generator'
 require 'active_support/message_verifier'
 
 module Rack
@@ -16,7 +17,6 @@ module Rack
     def call(env)
       @request = Rack::Request.new(env)
 
-      verifier = ActiveSupport::MessageVerifier.new(@options[:secret])
       resource_ids, remember_key = verifier.verify(@request.cookies[cookie_name])
       env["current_#{resource}_id"] = resource_ids.first
 
@@ -29,6 +29,15 @@ module Rack
 
     def redirect!
       [302, { 'Content-Type' => 'text/html', 'Location' => redirect_url }, ["Redirected to #{redirect_url}!"]]
+    end
+
+    def verifier
+      @verifier ||= ActiveSupport::MessageVerifier.new(secret)
+    end
+
+    def secret
+      key_generator = ActiveSupport::KeyGenerator.new(@options[:secret], iterations: 1000)
+      key_generator.generate_key('signed cookie')
     end
 
     def resource

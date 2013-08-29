@@ -20,7 +20,9 @@ class Test::Unit::TestCase
   end
 
   def verifier(secret = nil)
-    @verifier ||= ActiveSupport::MessageVerifier.new(secret || @options[:secret])
+    key_generator = ActiveSupport::KeyGenerator.new(secret || @options[:secret], iterations: 1000)
+    secret = key_generator.generate_key('signed cookie')
+    ActiveSupport::MessageVerifier.new(secret)
   end
 
   private

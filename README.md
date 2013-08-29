@@ -3,7 +3,7 @@ Rack::DeviseCookieAuth [![Build Status](https://secure.travis-ci.org/jilion/rack
 
 Rack::DeviseCookieAuth allows to log-in from a [Devise](https://github.com/plataformatec/devise) remember-me token stored in a cookie.
 
-It depends on Active::Support >= 2.3.2 and is tested against Ruby 1.9.2, 1.9.3, ruby-head and the latest versions of Rubinius & JRuby.
+It depends on Active::Support >= 4.0.0 and is tested against Ruby 1.9.3, 2.0.0 and the latest versions of Rubinius & JRuby.
 
 ## Installation
 
@@ -28,7 +28,7 @@ If you don't use Bundler, be sure to require Rack::DeviseCookieAuth manually bef
  use Rack::DeviseCookieAuth, secret: 'YOUR_SESSION_SECRET'
 ```
 
-To use Rack::DeviseCookieAuth in your Rails application, add the following line to your application config file (`config/application.rb` or `config/environments/production.rb`) for Rails 3, `config/environment.rb` for Rails 2):
+To use Rack::DeviseCookieAuth in your Rails application, add the following line to your application config file (`config/application.rb` or `config/environments/production.rb`) for Rails 4:
 
 ```ruby
 config.middleware.use Rack::DeviseCookieAuth, secret: 'YOUR_SESSION_SECRET'

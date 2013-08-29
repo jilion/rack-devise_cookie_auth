@@ -1,11 +1,8 @@
 language: ruby
-bundler_args: --without guard
 rvm:
-  - 1.9.2
   - 1.9.3
-  - ruby-head
+  - 2.0.0
   - jruby-19mode
-  - jruby-head
   - rbx-19mode
 branches:
   only:
@@ -13,3 +10,4 @@ branches:
 notifications:
   recipients:
     - remy@jilion.com
+    - thibaud@jilion.com
